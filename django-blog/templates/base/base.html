@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}
+  {% include 'base/header.html' %}
+	<body>
+
+		<!-- Header -->
+		<header id="header">
+			<!-- Nav -->
+			<div id="nav">
+				<!-- Main Nav -->
+				<div id="nav-fixed">
+					<div class="container">
+						<!-- logo -->
+						<div class="nav-logo">
+							<a href="{% url 'home' %}" class="logo"><img src="{% static './img/logo.png' %}" alt=""></a>
+						</div>
+						<!-- /logo -->
+
+						<!-- nav -->
+						<ul class="nav-menu nav navbar-nav">
+							<li><a href="category.html">News</a></li>
+							<li><a href="category.html">Popular</a></li>
+							{% for menu in menu %}
+							<li class="cat-{{ forloop.counter }}"><a href="{% url 'category' menu.menu %}">{{ menu.menu }}</a></li>
+							{% endfor %}
+						</ul>
+						<!-- /nav -->
+
+						<!-- search & aside toggle -->
+						<div class="nav-btns">
+							<button class="aside-btn"><i class="fa fa-bars"></i></button>
+							<button class="search-btn"><i class="fa fa-search"></i></button>
+							<form class="" action="{% url 'search' %}" method="post">
+								{% csrf_token %}
+								<div class="search-form">
+									<input class="search-input" type="text" name="search" placeholder="Enter Your Search ...">
+									<span class="search-close"><i class="fa fa-times"></i></span>
+								</div>
+							</form>
+						</div>
+						<!-- /search & aside toggle -->
+					</div>
+				</div>
+				<!-- /Main Nav -->
+
+				<!-- Aside Nav -->
+				{% include 'base/asidebar.html' %}
+				<!-- Aside Nav -->
+			</div>
+			<!-- /Nav -->
+			{% block extraheader %}
+
+			{% endblock %}
+		</header>
+		<!-- /Header -->
+
+		<!-- section Home Page -->
+		{% block content %}
+
+		{% endblock %}
+
+		<!-- Footer -->
+    {% include 'base/footer.html' %}
+		<!-- /Footer -->
+
+		<!-- jQuery Plugins -->
+		{% include 'base/js.html' %}
+		<!-- /jQuery Plugins -->
+
+	</body>
+</html>

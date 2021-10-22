@@ -1,0 +1,252 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<!-- section -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <!-- post -->
+      {% for post in header_post %}
+      <div class="col-md-6">
+        <div class="post post-thumb">
+          <a class="post-img" href="{% url 'blog-post' post.post.id %}"><img src="{{ post.post.image.url }}" alt="" height="300px" width="550px"></a>
+          <div class="post-body">
+            <div class="post-meta">
+              <a class="post-category cat-{{ post.post.category.id }}" href="{% url 'category' post.post.category %}">{{ post.post.category }}</a>
+              <span class="post-date">{{ post.post.pub_date }}</span>
+            </div>
+            <h3 class="post-title"><a href="{% url 'blog-post' post.post.id %}">{{ post.post.title }}</a></h3>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- /row -->
+
+    <!-- row -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-title">
+          <h2>Recent Posts</h2>
+        </div>
+      </div>
+
+      <!-- post -->
+      {% for post in recent_post %}
+      <div class="col-md-4">
+        <div class="post">
+          <a class="post-img" href="{% url 'blog-post' post.id %}"><img src="{{ post.image.url }}" alt="" height="200px" width="350px"></a>
+          <div class="post-body">
+            <div class="post-meta">
+              <a class="post-category cat-{{ post.category.id }}" href="{% url 'category' post.category %}">{{ post.category }}</a>
+              <span class="post-date">{{ post.pub_date }}</span>
+            </div>
+            <h3 class="post-title"><a href="{% url 'blog-post' post.id %}">{{ post.title }}</a></h3>
+          </div>
+        </div>
+      </div>
+      {% if forloop.counter == 3 %}
+      <div class="clearfix visible-md visible-lg"></div>
+      {% endif %}
+      {% endfor %}
+
+      <!-- /post -->
+    </div>
+    <!-- /row -->
+
+    <!-- row -->
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <!-- post -->
+          <div class="col-md-12">
+            <div class="post post-thumb">
+              <a class="post-img" href="{% url 'blog-post' post.id %}"><img src="{{ post.image.url }}" alt=""></a>
+              <div class="post-body">
+                <div class="post-meta">
+                  <a class="post-category cat-{{ post.category.id }}" href="{% url 'category' post.category %}">{{ post.category }}</a>
+                  <span class="post-date">{{ post.pub_date }}</span>
+                </div>
+                <h3 class="post-title"><a href="{% url 'blog-post' post.id %}">{{ post.title }}</a></h3>
+              </div>
+            </div>
+          </div>
+          <!-- /post -->
+
+          <!-- post -->
+          {% for post in recent_post %}
+            <div class="col-md-6">
+              <div class="post">
+                <a class="post-img" href="{% url 'blog-post' post.id %}"><img src="{{ post.image.url }}" alt=""></a>
+                <div class="post-body">
+                  <div class="post-meta">
+                    <a class="post-category cat-{{ post.category.id }}" href="{% url 'category' post.category %}">{{ post.category }}</a>
+                    <span class="post-date">{{ post.pub_date }}</span>
+                  </div>
+                  <h3 class="post-title"><a href="{% url 'blog-post' post.id %}">{{ post.title }}</a></h3>
+                </div>
+              </div>
+            </div>
+            {% if forloop.counter == 2 %}
+            <div class="clearfix visible-md visible-lg"></div>
+            {% endif %}
+            {% if forloop.counter == 4 %}
+            <div class="clearfix visible-md visible-lg"></div>
+            {% endif %}
+          {% endfor %}
+          <!-- /post -->
+
+
+
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <!-- post widget -->
+        <div class="aside-widget">
+          <div class="section-title">
+            <h2>Most Read</h2>
+          </div>
+          {% for post in most_read_post %}
+          <div class="post post-widget">
+            <a class="post-img" href="{% url 'blog-post' post.id %}"><img src="{{ post.image.url }}" alt="image"></a>
+            <div class="post-body">
+              <h3 class="post-title"><a href="{% url 'blog-post' post.id %}">{{ post.title }}</a></h3>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- /post widget -->
+
+        <!-- post widget -->
+        <div class="aside-widget">
+          <div class="section-title">
+            <h2>Featured Posts</h2>
+          </div>
+          {% for post in featured_post %}
+          <div class="post post-thumb">
+            <a class="post-img" href="{% url 'blog-post' post.id %}"><img src="{{ post.post.image.url }}" alt=""></a>
+            <div class="post-body">
+              <div class="post-meta">
+                <a class="post-category cat-{{ post.post.category.id }}" href="{% url 'category' post.post.category %}">{{ post.post.category }}</a>
+                <span class="post-date">{{ post.post.pub_date }}</span>
+              </div>
+              <h3 class="post-title"><a href="{% url 'blog-post' post.id %}">{{ post.post.title }}</a></h3>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- /post widget -->
+
+        <!-- ad -->
+        <div class="aside-widget text-center">
+          <a href="#" style="display: inline-block;margin: auto;">
+            <img class="img-responsive" src="{% static './img/ad-1.jpg' %}" alt="">
+          </a>
+        </div>
+        <!-- /ad -->
+      </div>
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /section -->
+
+<!-- section -->
+<div class="section section-grey">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-title text-center">
+          <h2>Featured Posts</h2>
+        </div>
+      </div>
+
+      <!-- post -->
+      {% for post in featured_post %}
+      <div class="col-md-4">
+        <div class="post">
+          <a class="post-img" href="{% url 'blog-post' post.id %}"><img src="{{ post.post.image.url }}" alt="" height="200px" width="350px"></a>
+          <div class="post-body">
+            <div class="post-meta">
+              <a class="post-category cat-{{ post.post.category.id }}" href="{% url 'category' post.post.category %}">{{ post.post.category }}</a>
+              <span class="post-date">{{ post.post.pub_date }}</span>
+            </div>
+            <h3 class="post-title"><a href="{% url 'blog-post' post.id %}">{{ post.post.title }}</a></h3>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- /post -->
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /section -->
+
+<!-- section -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-title">
+              <h2>Most Read</h2>
+            </div>
+          </div>
+          <!-- post -->
+          {% for post in most_read_post %}
+          <div class="col-md-12">
+            <div class="post post-row">
+              <a class="post-img" href="{% url 'blog-post' post.id %}"><img src="{{ post.image.url }}" alt=""></a>
+              <div class="post-body">
+                <div class="post-meta">
+                  <a class="post-category cat-{{ post.category.id }}" href="{% url 'category' post.category %}">{{ post.category }}</a>
+                  <span class="post-date">{{ post.pub_date }}</span>
+                </div>
+                <h3 class="post-title"><a href="{% url 'blog-post' post.id %}">{{ post.title }}</a></h3>
+                <p>{{ post.content|safe|truncatewords:30 }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          <!-- /post -->
+
+          <div class="col-md-12">
+            <div class="section-row">
+              <button class="primary-button center-block">Load More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <!-- ad -->
+        <div class="aside-widget text-center">
+          <a href="#" style="display: inline-block;margin: auto;">
+            <img class="img-responsive" src="{% static './img/ad-1.jpg' %}" alt="">
+          </a>
+        </div>
+        <!-- /ad -->
+
+        <!-- catagories -->
+        {% include 'base/category-tag.html' %}
+        <!-- /catagories -->
+
+      </div>
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /section -->
+{% endblock %}

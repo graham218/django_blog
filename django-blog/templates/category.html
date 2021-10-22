@@ -1,0 +1,155 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extraheader %}
+<div class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10">
+				<ul class="page-header-breadcrumb">
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li>{{ category_name }}</li>
+				</ul>
+				<h1>{{ category_name }}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- section -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row">
+					<!-- post -->
+					<div class="col-md-12">
+						<div class="post post-thumb">
+							<span class="post-img"><img src="{{ category_name.ctg_image.url }}" alt=""></span>
+							<div class="post-body">
+								<div class="post-meta">
+									<span class="post-category cat-{{ category_name.id }}">{{ category_name }}</span>
+									<span class="post-date">{{ category_name.create_date }}</span>
+								</div>
+								<h3 class="post-title">{{ category_name }}: {{ category_name.title }}</h3>
+							</div>
+						</div>
+					</div>
+					<!-- /post -->
+
+					<!-- post -->
+					{% for post in ctg_feature_post %}
+					<div class="col-md-6">
+						<div class="post">
+							<a class="post-img" href="{% url 'blog-post' post.id %}"><img src="{{ post.image.url }}" alt="" width="350px" height="200px"></a>
+							<div class="post-body">
+								<div class="post-meta">
+									<a class="post-category cat-{{ post.category.id }}" href="#">{{ post.category }}</a>
+									<span class="post-date">{{ post.pub_date }}</span>
+								</div>
+								<h3 class="post-title"><a href="{% url 'blog-post' post.id %}">{{ post.title }}</a></h3>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					<!-- /post -->
+
+					<div class="clearfix visible-md visible-lg"></div>
+
+					<!-- ad -->
+					<div class="col-md-12">
+						<div class="section-row">
+							<a href="#">
+								<img class="img-responsive center-block" src="{% static './img/ad-2.jpg' %}" alt="">
+							</a>
+						</div>
+					</div>
+					<!-- ad -->
+
+					<!-- post -->
+					{% if post %}
+					{% for post in post %}
+					<div class="col-md-12">
+						<div class="post post-row">
+							<a class="post-img" href="{% url 'blog-post' post.id %}"><img src="{{ post.image.url }}" alt=""></a>
+							<div class="post-body">
+								<div class="post-meta">
+									<a class="post-category cat-{{ post.category.id }}" href="#">{{ post.category }}</a>
+									<span class="post-date">{{ post.pub_date}}</span>
+								</div>
+								<h3 class="post-title"><a href="{% url 'blog-post' post.id %}">{{ post.title }}</a></h3>
+								<p>{{ post.content|safe|truncatewords:30 }}</p>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					<!-- /post -->
+
+					<div class="col-md-12">
+						<div class="section-row">
+							<button class="primary-button center-block">Load More</button>
+						</div>
+					</div>
+					{% else %}
+					<h2>No Post Found!</h2>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<!-- ad -->
+				<div class="aside-widget text-center">
+					<a href="#" style="display: inline-block;margin: auto;">
+						<img class="img-responsive" src="./img/ad-1.jpg" alt="">
+					</a>
+				</div>
+				<!-- /ad -->
+
+				<!-- post widget -->
+				{% if ctg_most_read_post %}
+				<div class="aside-widget">
+					<div class="section-title">
+						<h2>Most Read</h2>
+					</div>
+					{% for post in ctg_most_read_post %}
+					<div class="post post-widget">
+						<a class="post-img" href="{% url 'blog-post' post.id %}"><img src="{{ post.image.url }}" alt=""></a>
+						<div class="post-body">
+							<h3 class="post-title"><a href="{% url 'blog-post' post.id %}">{{ post.title }}</a></h3>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				{% endif %}
+				<!-- /post widget -->
+
+				<!-- catagories and tags -->
+				{% include 'base/category-tag.html' %}
+				<!-- /catagories and tags -->
+
+				<!-- archive -->
+				<div class="aside-widget">
+					<div class="section-title">
+						<h2>Archive</h2>
+					</div>
+					<div class="archive-widget">
+						<ul>
+							<li><a href="#">Jan 2018</a></li>
+							<li><a href="#">Feb 2018</a></li>
+							<li><a href="#">Mar 2018</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /archive -->
+			</div>
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /section -->
+{% endblock %}
